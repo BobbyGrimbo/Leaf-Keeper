@@ -10,314 +10,249 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --green-deep:   #1a3a27;
-      --green-mid:    #2f6b45;
-      --green-soft:   #4a9060;
-      --green-pale:   #eaf6ee;
-      --green-mist:   #f4f7f4;
-      --cream:        #fdfcf8;
-      --ink:          #1b2b1f;
-      --ink-muted:    #5a7263;
-      --border:       rgba(42, 90, 58, 0.12);
-      --red:          #b42318;
-      --radius-sm:    8px;
-      --radius-md:    14px;
-      --radius-lg:    20px;
-      --shadow-card:  0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+      --green-deep:  #1a3a27;
+      --green-mid:   #2f6b45;
+      --green-soft:  #4a9060;
+      --green-pale:  #eaf6ee;
+      --green-mist:  #f4f7f4;
+      --cream:       #fdfcf8;
+      --ink:         #1b2b1f;
+      --ink-muted:   #5a7263;
+      --border:      rgba(42,90,58,0.12);
+      --red:         #b42318;
+      --amber:       #92600a;
+      --amber-pale:  #fff3cd;
+      --blue-pale:   #e8f4fd;
+      --blue:        #1a6fa8;
+      --radius-sm:   8px;
+      --radius-md:   14px;
+      --radius-lg:   20px;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
     }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--green-mist);
-      color: var(--ink);
-      min-height: 100vh;
-    }
+    body { font-family:'DM Sans',sans-serif; background:var(--green-mist); color:var(--ink); min-height:100vh; }
 
+    /* HEADER */
     header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(253,252,248,0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 20px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position:sticky; top:0; z-index:100;
+      background:rgba(253,252,248,0.92);
+      backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border);
+      padding:0 20px; height:56px;
+      display:flex; align-items:center; justify-content:space-between;
     }
-
-    .header-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 20px;
-      color: var(--green-deep);
-      letter-spacing: -0.2px;
-    }
-
-    .header-logo span { color: var(--green-soft); }
-
-    .container {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 20px 16px 48px;
-    }
+    .header-logo { font-family:'DM Serif Display',serif; font-size:20px; color:var(--green-deep); letter-spacing:-0.2px; }
+    .header-logo span { color:var(--green-soft); }
 
     .weather-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 6px 14px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--ink-muted);
-      margin-bottom: 24px;
+      display:inline-flex; align-items:center; gap:6px;
+      background:var(--cream); border:1px solid var(--border);
+      border-radius:999px; padding:6px 14px;
+      font-size:13px; font-weight:500; color:var(--ink-muted);
     }
+    .weather-dot { width:7px; height:7px; border-radius:50%; background:var(--green-soft); }
 
-    .weather-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--green-soft);
-    }
+    /* CONTAINER */
+    .container { max-width:640px; margin:0 auto; padding:20px 16px 60px; }
 
+    /* SECTION LABEL */
     .section-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 10px;
+      font-size:11px; font-weight:500; letter-spacing:0.08em;
+      text-transform:uppercase; color:var(--ink-muted); margin-bottom:10px;
     }
 
+    /* HEALTH BANNER */
+    .health-banner {
+      border-radius:var(--radius-lg); padding:16px 18px;
+      margin-bottom:20px; display:flex; align-items:center; gap:14px;
+      box-shadow:var(--shadow-card);
+    }
+    .health-banner.great  { background:var(--green-pale); border:1px solid rgba(47,107,69,0.18); }
+    .health-banner.ok     { background:var(--amber-pale); border:1px solid rgba(146,96,10,0.18); }
+    .health-banner.needs  { background:#fce8e8; border:1px solid rgba(180,35,24,0.18); }
+
+    .health-ring {
+      width:52px; height:52px; flex-shrink:0;
+      border-radius:50%; display:flex; align-items:center;
+      justify-content:center; font-size:22px;
+      font-weight:700; font-family:'DM Serif Display',serif;
+    }
+    .great .health-ring { background:rgba(47,107,69,0.12); color:var(--green-mid); }
+    .ok    .health-ring { background:rgba(146,96,10,0.12);  color:var(--amber); }
+    .needs .health-ring { background:rgba(180,35,24,0.12);  color:var(--red); }
+
+    .health-text-title  { font-weight:600; font-size:15px; }
+    .health-text-sub    { font-size:13px; color:var(--ink-muted); margin-top:2px; line-height:1.5; }
+
+    /* PLANT CARDS */
     .plant-card {
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 14px 16px;
-      margin-bottom: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      box-shadow: var(--shadow-card);
+      background:var(--cream); border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:14px 16px; margin-bottom:8px;
+      cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+      transition:transform 0.15s ease,box-shadow 0.15s ease;
+      box-shadow:var(--shadow-card);
     }
-
-    .plant-card:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06);
-    }
-
-    .plant-card:active { transform: scale(0.99); }
-
-    .plant-card-left { display: flex; align-items: center; gap: 12px; }
+    .plant-card:hover  { transform:translateY(-1px); box-shadow:0 2px 8px rgba(0,0,0,0.08),0 8px 24px rgba(0,0,0,0.06); }
+    .plant-card:active { transform:scale(0.99); }
+    .plant-card-left   { display:flex; align-items:center; gap:12px; }
 
     .plant-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-sm);
-      background: var(--green-pale);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-      overflow: hidden;
+      width:44px; height:44px; border-radius:var(--radius-sm);
+      background:var(--green-pale); display:flex; align-items:center;
+      justify-content:center; font-size:20px; flex-shrink:0; overflow:hidden;
     }
+    .plant-avatar img { width:100%; height:100%; object-fit:cover; border-radius:var(--radius-sm); }
 
-    .plant-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: var(--radius-sm);
-    }
+    .plant-card-name  { font-weight:500; font-size:15px; color:var(--ink); }
+    .plant-card-sub   { font-size:12px; color:var(--ink-muted); margin-top:2px; }
+    .plant-card-arrow { color:var(--ink-muted); font-size:18px; opacity:0.4; }
 
-    .plant-card-name { font-weight: 500; font-size: 15px; color: var(--ink); }
-    .plant-card-sub  { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
-    .plant-card-arrow { color: var(--ink-muted); font-size: 18px; opacity: 0.4; }
+    /* BADGES */
+    .badge { font-size:11px; font-weight:500; padding:3px 8px; border-radius:999px; }
+    .badge-green  { background:var(--green-pale); color:var(--green-mid); }
+    .badge-amber  { background:var(--amber-pale); color:var(--amber); }
+    .badge-red    { background:#fce8e8; color:var(--red); }
+    .badge-blue   { background:var(--blue-pale);  color:var(--blue); }
 
-    .water-badge { font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 999px; }
-    .water-ok    { background: var(--green-pale); color: var(--green-mid); }
-    .water-due   { background: #fff3cd; color: #856404; }
-    .water-late  { background: #fce8e8; color: #b42318; }
+    /* EMPTY STATE */
+    .empty-state { text-align:center; padding:40px 20px; color:var(--ink-muted); }
+    .empty-state .big-leaf { font-size:40px; margin-bottom:12px; }
+    .empty-state p { font-size:14px; line-height:1.6; }
 
-    .empty-state { text-align: center; padding: 40px 20px; color: var(--ink-muted); }
-    .empty-state .big-leaf { font-size: 40px; margin-bottom: 12px; }
-    .empty-state p { font-size: 14px; line-height: 1.6; }
-
+    /* FORM */
     .form-card {
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 18px 16px;
-      box-shadow: var(--shadow-card);
+      background:var(--cream); border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:18px 16px;
+      box-shadow:var(--shadow-card);
     }
-
-    .form-row { margin-bottom: 10px; }
-
-    .form-row label {
-      display: block;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--ink-muted);
-      margin-bottom: 4px;
-    }
+    .form-row { margin-bottom:10px; }
+    .form-row label { display:block; font-size:12px; font-weight:500; color:var(--ink-muted); margin-bottom:4px; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 
     input, select, textarea {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      background: var(--green-mist);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      color: var(--ink);
-      outline: none;
-      transition: border-color 0.15s;
+      width:100%; padding:10px 12px;
+      border-radius:var(--radius-sm); border:1px solid var(--border);
+      background:var(--green-mist); font-family:'DM Sans',sans-serif;
+      font-size:14px; color:var(--ink); outline:none; transition:border-color 0.15s;
     }
+    input:focus, select:focus, textarea:focus { border-color:var(--green-soft); background:white; }
+    textarea { resize:vertical; min-height:72px; }
 
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--green-soft);
-      background: white;
-    }
-
-    textarea { resize: vertical; min-height: 72px; }
-
+    /* BUTTONS */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 18px;
-      border-radius: 999px;
-      border: none;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.15s ease;
+      display:inline-flex; align-items:center; gap:6px;
+      padding:10px 18px; border-radius:999px; border:none;
+      font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500;
+      cursor:pointer; transition:all 0.15s ease;
     }
+    .btn:active { transform:scale(0.97); }
+    .btn-primary { background:var(--green-mid); color:white; }
+    .btn-primary:hover { background:var(--green-deep); }
+    .btn-ghost { background:transparent; color:var(--ink-muted); border:1px solid var(--border); }
+    .btn-ghost:hover { background:var(--green-pale); color:var(--green-mid); }
+    .btn-blue { background:var(--blue-pale); color:var(--blue); border:1px solid rgba(26,111,168,0.2); }
+    .btn-blue:hover { background:#d0eaf9; }
+    .btn-danger { background:var(--red); color:white; }
+    .btn-danger:hover { background:#8f1c14; }
+    .btn-sm { padding:7px 14px; font-size:13px; }
+    .btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }
 
-    .btn:active { transform: scale(0.97); }
-    .btn-primary { background: var(--green-mid); color: white; }
-    .btn-primary:hover { background: var(--green-deep); }
-    .btn-ghost { background: transparent; color: var(--ink-muted); border: 1px solid var(--border); }
-    .btn-ghost:hover { background: var(--green-pale); color: var(--green-mid); }
-    .btn-danger { background: var(--red); color: white; }
-    .btn-danger:hover { background: #8f1c14; }
-    .btn-sm { padding: 7px 14px; font-size: 13px; }
-    .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
-
+    /* DETAIL */
     .detail-photo {
-      width: 100%;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      background: var(--green-pale);
-      margin-bottom: 16px;
+      width:100%; border-radius:var(--radius-lg); overflow:hidden;
+      background:var(--green-pale); margin-bottom:16px;
     }
-
-    .detail-photo img {
-      width: 100%;
-      display: block;
-      max-height: 260px;
-      object-fit: cover;
-    }
-
+    .detail-photo img { width:100%; display:block; max-height:260px; object-fit:cover; }
     .detail-photo-empty {
-      height: 140px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
-      opacity: 0.4;
+      height:140px; display:flex; align-items:center;
+      justify-content:center; font-size:48px; opacity:0.4;
     }
 
     .detail-meta {
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 14px 16px;
-      margin-bottom: 12px;
-      box-shadow: var(--shadow-card);
+      background:var(--cream); border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:14px 16px;
+      margin-bottom:12px; box-shadow:var(--shadow-card);
     }
-
     .meta-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      padding: 5px 0;
-      border-bottom: 1px solid var(--border);
+      display:flex; justify-content:space-between; align-items:center;
+      font-size:13px; padding:6px 0; border-bottom:1px solid var(--border);
     }
+    .meta-row:last-child { border-bottom:none; }
+    .meta-label { color:var(--ink-muted); }
+    .meta-value { font-weight:500; color:var(--ink); text-align:right; }
 
-    .meta-row:last-child { border-bottom: none; }
-    .meta-label { color: var(--ink-muted); }
-    .meta-value { font-weight: 500; color: var(--ink); }
+    /* CARE ACTIONS ROW */
+    .care-actions {
+      display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;
+    }
+    .care-action-card {
+      background:var(--cream); border:1px solid var(--border);
+      border-radius:var(--radius-md); padding:14px;
+      box-shadow:var(--shadow-card);
+    }
+    .care-action-label { font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-muted); margin-bottom:4px; }
+    .care-action-status { font-size:13px; font-weight:500; margin-bottom:10px; }
+    .care-action-date { font-size:12px; color:var(--ink-muted); margin-bottom:10px; }
 
+    /* SPECIES FACTS */
+    .facts-card {
+      background:var(--cream); border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:16px;
+      margin-bottom:12px; box-shadow:var(--shadow-card);
+    }
+    .facts-title {
+      font-size:11px; font-weight:500; text-transform:uppercase;
+      letter-spacing:0.07em; color:var(--green-soft); margin-bottom:10px;
+    }
+    .fact-row { display:flex; gap:10px; align-items:flex-start; margin-bottom:8px; font-size:13px; line-height:1.5; }
+    .fact-row:last-child { margin-bottom:0; }
+    .fact-icon { flex-shrink:0; font-size:15px; margin-top:1px; }
+    .fact-text { color:var(--ink-muted); }
+    .fact-text strong { color:var(--ink); font-weight:500; }
+
+    /* COACH BOX */
     .coach-box {
-      background: var(--green-pale);
-      border: 1px solid rgba(47,107,69,0.15);
-      border-radius: var(--radius-md);
-      padding: 12px 14px;
-      font-size: 13px;
-      color: var(--green-deep);
-      line-height: 1.6;
-      margin-bottom: 12px;
+      background:var(--green-pale); border:1px solid rgba(47,107,69,0.15);
+      border-radius:var(--radius-md); padding:12px 14px;
+      font-size:13px; color:var(--green-deep); line-height:1.6; margin-bottom:12px;
     }
-
     .coach-box-title {
-      font-weight: 500;
-      font-size: 11px;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: var(--green-soft);
-      margin-bottom: 4px;
+      font-weight:500; font-size:11px; letter-spacing:0.07em;
+      text-transform:uppercase; color:var(--green-soft); margin-bottom:4px;
     }
 
+    /* FILE INPUT */
     .file-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px dashed var(--green-soft);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--green-mid);
-      cursor: pointer;
-      transition: background 0.15s;
+      display:inline-flex; align-items:center; gap:6px;
+      padding:8px 14px; border-radius:999px;
+      border:1px dashed var(--green-soft);
+      font-size:13px; font-weight:500; color:var(--green-mid);
+      cursor:pointer; transition:background 0.15s;
     }
+    .file-label:hover { background:var(--green-pale); }
+    input[type="file"] { display:none; }
 
-    .file-label:hover { background: var(--green-pale); }
-    input[type="file"] { display: none; }
+    /* DIVIDER */
+    .divider { height:1px; background:var(--border); margin:20px 0; }
 
-    .divider { height: 1px; background: var(--border); margin: 20px 0; }
-
+    /* TOAST */
     #toast {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: var(--green-deep);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 500;
-      z-index: 999;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      white-space: nowrap;
+      position:fixed; bottom:24px; left:50%;
+      transform:translateX(-50%) translateY(80px);
+      background:var(--green-deep); color:white;
+      padding:10px 20px; border-radius:999px;
+      font-size:14px; font-weight:500; z-index:999;
+      transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      white-space:nowrap; pointer-events:none;
     }
+    #toast.show { transform:translateX(-50%) translateY(0); }
 
-    #toast.show { transform: translateX(-50%) translateY(0); }
-
-    .hidden { display: none !important; }
-    .mt-8  { margin-top: 8px; }
-    .mt-16 { margin-top: 16px; }
-    .mt-24 { margin-top: 24px; }
-    .loading-text { text-align: center; padding: 24px; color: var(--ink-muted); font-size: 14px; }
+    /* UTILS */
+    .hidden { display:none !important; }
+    .mt-8  { margin-top:8px; }
+    .mt-16 { margin-top:16px; }
+    .mt-24 { margin-top:24px; }
+    .loading-text { text-align:center; padding:24px; color:var(--ink-muted); font-size:14px; }
   </style>
 </head>
 
@@ -325,7 +260,7 @@
 
 <header>
   <div class="header-logo">🌿 Leaf<span>Keeper</span></div>
-  <div id="weatherPill" class="weather-pill">
+  <div class="weather-pill">
     <div class="weather-dot"></div>
     <span id="weatherText">Loading…</span>
   </div>
@@ -333,8 +268,9 @@
 
 <div class="container">
 
-  <!-- LIST VIEW -->
+  <!-- ═══════ LIST VIEW ═══════ -->
   <div id="listView">
+
     <div class="mt-24">
       <div class="section-label">Your plants</div>
       <div id="plantList"><div class="loading-text">Loading plants…</div></div>
@@ -355,19 +291,32 @@
           <option value="succulent">Succulent</option>
           <option value="fern">Fern</option>
           <option value="fiddle leaf fig">Fiddle Leaf Fig</option>
+          <option value="cactus">Cactus</option>
+          <option value="orchid">Orchid</option>
+          <option value="pothos">Pothos</option>
+          <option value="snake plant">Snake Plant</option>
+          <option value="peace lily">Peace Lily</option>
+          <option value="rubber plant">Rubber Plant</option>
+          <option value="monstera">Monstera</option>
+          <option value="lemon tree">Lemon Tree</option>
         </select>
       </div>
-      <div class="form-row"><label>Watering interval (days)</label><input id="newInterval" type="number" placeholder="7" min="1" max="365"></div>
+      <div class="form-grid">
+        <div class="form-row"><label>Water every (days)</label><input id="newInterval" type="number" placeholder="7" min="1" max="365"></div>
+        <div class="form-row"><label>Fertilize every (days)</label><input id="newFertilizeInterval" type="number" placeholder="30" min="1" max="365"></div>
+      </div>
       <div class="form-row"><label>Notes</label><textarea id="newNotes" placeholder="Any care notes…"></textarea></div>
       <div class="btn-row">
         <button class="btn btn-primary" onclick="addPlant()">Add plant</button>
       </div>
     </div>
+
   </div>
 
-  <!-- DETAIL VIEW -->
+  <!-- ═══════ DETAIL VIEW ═══════ -->
   <div id="detailView" class="hidden">
-    <div class="btn-row" style="margin-top: 0; margin-bottom: 20px;">
+
+    <div class="btn-row" style="margin-top:0; margin-bottom:20px;">
       <button class="btn btn-ghost btn-sm" onclick="back()">← Back</button>
     </div>
 
@@ -375,21 +324,47 @@
       <div class="detail-photo-empty">🌿</div>
     </div>
 
-    <h2 id="detailName" style="font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--green-deep); margin-bottom: 4px;"></h2>
-    <p id="detailSpecies" style="font-size: 14px; color: var(--ink-muted); margin-bottom: 16px;"></p>
+    <h2 id="detailName" style="font-family:'DM Serif Display',serif; font-size:26px; color:var(--green-deep); margin-bottom:4px;"></h2>
+    <p id="detailSpecies" style="font-size:14px; color:var(--ink-muted); margin-bottom:16px;"></p>
 
+    <!-- Health banner -->
+    <div id="healthBanner" class="hidden"></div>
+
+    <!-- Care action cards (water + fertilize) -->
+    <div class="care-actions">
+      <div class="care-action-card">
+        <div class="care-action-label">💧 Watering</div>
+        <div id="waterStatus" class="care-action-status">—</div>
+        <div id="waterDate" class="care-action-date"></div>
+        <button class="btn btn-primary btn-sm" onclick="waterPlant()">Water now</button>
+      </div>
+      <div class="care-action-card">
+        <div class="care-action-label">🌿 Fertilizing</div>
+        <div id="fertilizeStatus" class="care-action-status">—</div>
+        <div id="fertilizeDate" class="care-action-date"></div>
+        <button class="btn btn-blue btn-sm" onclick="fertilizePlant()">Fertilize now</button>
+      </div>
+    </div>
+
+    <!-- Species facts -->
+    <div id="factsCard" class="facts-card hidden"></div>
+
+    <!-- Coach tip -->
     <div id="coachBox" class="coach-box hidden"></div>
+
+    <!-- Meta -->
     <div id="detailMeta" class="detail-meta"></div>
 
+    <!-- Photo -->
     <label class="file-label" for="photoInput">📷 Upload photo</label>
     <input type="file" id="photoInput" accept="image/*" onchange="uploadPhoto()">
 
     <div class="btn-row mt-16">
-      <button class="btn btn-primary btn-sm" onclick="waterPlant()">💧 Water now</button>
-      <button class="btn btn-ghost btn-sm" onclick="showEditBox()">✏️ Edit</button>
+      <button class="btn btn-ghost btn-sm" onclick="showEditBox()">✏️ Edit plant</button>
       <button class="btn btn-danger btn-sm" onclick="deletePlant()">Delete</button>
     </div>
 
+    <!-- Edit box -->
     <div id="editBox" class="hidden">
       <div class="divider"></div>
       <div class="section-label">Edit plant</div>
@@ -405,9 +380,20 @@
             <option value="succulent">Succulent</option>
             <option value="fern">Fern</option>
             <option value="fiddle leaf fig">Fiddle Leaf Fig</option>
+            <option value="cactus">Cactus</option>
+            <option value="orchid">Orchid</option>
+            <option value="pothos">Pothos</option>
+            <option value="snake plant">Snake Plant</option>
+            <option value="peace lily">Peace Lily</option>
+            <option value="rubber plant">Rubber Plant</option>
+            <option value="monstera">Monstera</option>
+            <option value="lemon tree">Lemon Tree</option>
           </select>
         </div>
-        <div class="form-row"><label>Watering interval (days)</label><input id="eInterval" type="number" min="1" max="365"></div>
+        <div class="form-grid">
+          <div class="form-row"><label>Water every (days)</label><input id="eInterval" type="number" min="1" max="365"></div>
+          <div class="form-row"><label>Fertilize every (days)</label><input id="eFertilizeInterval" type="number" min="1" max="365"></div>
+        </div>
         <div class="form-row"><label>Notes</label><textarea id="eNotes"></textarea></div>
         <div class="btn-row">
           <button class="btn btn-primary btn-sm" onclick="saveEdit()">Save changes</button>
@@ -415,6 +401,7 @@
         </div>
       </div>
     </div>
+
   </div>
 
 </div>
@@ -422,15 +409,168 @@
 <div id="toast"></div>
 
 <script>
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
 const { createClient } = supabase;
-
 const db = createClient(
   "https://norlzfajrksdgwpyrzpq.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vcmx6ZmFqcmtzZGd3cHlyenBxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzODUzNTEsImV4cCI6MjA5NTk2MTM1MX0.jwBTgh4jhALWf9RUhlEEzE2xKeyMMI8QWn4ArA7P-Ts"
 );
-
 let current = null;
 
+/* ═══════════════════════════════════════
+   SPECIES FACTS DATABASE
+═══════════════════════════════════════ */
+const SPECIES_FACTS = {
+  "fiddle leaf fig": {
+    emoji: "🌳",
+    facts: [
+      { icon: "☀️", label: "Light",    text: "Bright indirect light. Avoid direct sun which scorches leaves." },
+      { icon: "💧", label: "Water",    text: "Every 7–10 days. Let top 2–3cm dry out completely first." },
+      { icon: "🌡️", label: "Temp",     text: "18–24°C. Hates cold draughts and sudden temperature changes." },
+      { icon: "💨", label: "Humidity", text: "Moderate to high. Mist occasionally or use a pebble tray." },
+      { icon: "🌿", label: "Fertilize",text: "Monthly in spring/summer with a balanced liquid feed." },
+      { icon: "⚠️", label: "Watch for",text: "Brown edges = underwatering or low humidity. Yellow leaves = overwatering." }
+    ]
+  },
+  "monstera": {
+    emoji: "🌿",
+    facts: [
+      { icon: "☀️", label: "Light",    text: "Bright to medium indirect light. Tolerates lower light but grows slower." },
+      { icon: "💧", label: "Water",    text: "Every 7–14 days. Allow top half of soil to dry out between waterings." },
+      { icon: "🌡️", label: "Temp",     text: "18–27°C. Keep away from cold windows in winter." },
+      { icon: "💨", label: "Humidity", text: "Loves humidity. Mist leaves or place near a humidifier." },
+      { icon: "🌿", label: "Fertilize",text: "Every 4–6 weeks in growing season with a balanced feed." },
+      { icon: "⚠️", label: "Watch for",text: "No splits in leaves = not enough light. Yellow leaves = overwatering." }
+    ]
+  },
+  "rubber plant": {
+    emoji: "🌿",
+    facts: [
+      { icon: "☀️", label: "Light",    text: "Bright indirect light. Can tolerate some shade but loses leaf vibrancy." },
+      { icon: "💧", label: "Water",    text: "Every 7–14 days in summer, less in winter. Avoid waterlogging." },
+      { icon: "🌡️", label: "Temp",     text: "15–24°C. Hardy but dislikes frost or cold draughts." },
+      { icon: "💨", label: "Humidity", text: "Average household humidity is fine. Wipe leaves occasionally." },
+      { icon: "🌿", label: "Fertilize",text: "Monthly in spring/summer. No feeding needed in winter." },
+      { icon: "⚠️", label: "Watch for",text: "Dropping leaves = stress from cold or overwatering. Sticky leaves = pests." }
+    ]
+  },
+  "snake plant": {
+    emoji: "🌵",
+    facts: [
+      { icon: "☀️", label: "Light",    text: "Very adaptable — tolerates low light but thrives in bright indirect light." },
+      { icon: "💧", label: "Water",    text: "Every 2–6 weeks. One of the most drought-tolerant houseplants." },
+      { icon: "🌡️", label: "Temp",     text: "15–29°C. Very forgiving. Avoid frost." },
+      { icon: "💨", label: "Humidity", text: "Tolerates dry air well. No misting needed." },
+      { icon: "🌿", label: "Fertilize",text: "2–3 times per year. Very light feeder — less is more." },
+      { icon: "⚠️", label: "Watch for",text: "Mushy base = root rot from overwatering. The #1 killer of snake plants." }
+    ]
+  },
+  "pothos": {
+    emoji: "🍃",
+    facts: [
+      { icon: "☀️", label: "Light",    text: "Very adaptable. Thrives in low to bright indirect light." },
+      { icon: "💧", label: "Water",    text: "Every 7–10 days. Allow soil to dry out between waterings." },
+      { icon: "🌡️", label: "Temp",     text: "15–29°C. One of the most tolerant houseplants available." },
+      { icon: "💨", label: "Humidity", text: "Tolerates average humidity. No special requirements." },
+      { icon: "🌿", label: "Fertilize",text: "Monthly in spring/summer with a balanced liquid fertilizer." },
+      { icon: "⚠️", label: "Watch for",text: "Yellow leaves = overwatering. Leggy growth = needs more light." }
+    ]
+  },
+  "peace lily": {
+    emoji: "🌸",
+    facts: [
+      { icon: "☀️", label: "Light",    text: "Low to medium indirect light. One of the best low-light plants." },
+      { icon: "💧", label: "Water",    text: "Weekly. Drooping leaves are a reliable signal it needs water." },
+      { icon: "🌡️", label: "Temp",     text: "18–27°C. Keep away from cold windows and draughts." },
+      { icon: "💨", label: "Humidity", text: "Loves humidity. Mist regularly or use a humidity tray." },
+      { icon: "🌿", label: "Fertilize",text: "Every 6 weeks in spring/summer with a balanced feed." },
+      { icon: "⚠️", label: "Watch for",text: "Brown tips = dry air or fluoride in tap water. Try filtered water." }
+    ]
+  },
+  "succulent": {
+    emoji: "🌵",
+    facts: [
+      { icon: "☀️", label: "Light",    text: "Bright direct or indirect light. At least 6 hours of sun daily." },
+      { icon: "💧", label: "Water",    text: "Every 14–21 days. Soil must be completely dry before watering again." },
+      { icon: "🌡️", label: "Temp",     text: "15–27°C. Tolerates heat well. Protect from hard frost." },
+      { icon: "💨", label: "Humidity", text: "Prefers dry air. Do not mist. Good airflow is important." },
+      { icon: "🌿", label: "Fertilize",text: "Once in spring with a diluted cactus fertilizer. Very light feeder." },
+      { icon: "⚠️", label: "Watch for",text: "Soft mushy leaves = overwatering. Stretched growth = not enough light." }
+    ]
+  },
+  "cactus": {
+    emoji: "🌵",
+    facts: [
+      { icon: "☀️", label: "Light",    text: "Full sun or very bright indirect light. South-facing windowsill ideal." },
+      { icon: "💧", label: "Water",    text: "Every 3–4 weeks in summer, barely at all in winter." },
+      { icon: "🌡️", label: "Temp",     text: "18–32°C in summer. Actually benefits from a cool dry winter rest." },
+      { icon: "💨", label: "Humidity", text: "Dry air only. Humidity causes rot. Never mist." },
+      { icon: "🌿", label: "Fertilize",text: "Once in spring with a cactus-specific fertilizer. No more." },
+      { icon: "⚠️", label: "Watch for",text: "Soft brown patches = rot from overwatering. The most common issue." }
+    ]
+  },
+  "orchid": {
+    emoji: "🌺",
+    facts: [
+      { icon: "☀️", label: "Light",    text: "Bright indirect light. No direct sun — it bleaches leaves." },
+      { icon: "💧", label: "Water",    text: "Every 7–10 days. Water thoroughly, then let drain completely." },
+      { icon: "🌡️", label: "Temp",     text: "18–24°C. A slight temperature drop at night encourages reblooming." },
+      { icon: "💨", label: "Humidity", text: "50–70% humidity. Mist roots (not flowers) or use a humidity tray." },
+      { icon: "🌿", label: "Fertilize",text: "Weakly, weekly — use diluted orchid feed every watering in growing season." },
+      { icon: "⚠️", label: "Watch for",text: "Wrinkled roots = underwatering. Grey/silvery roots = healthy and dry." }
+    ]
+  },
+  "fern": {
+    emoji: "🌿",
+    facts: [
+      { icon: "☀️", label: "Light",    text: "Low to medium indirect light. Avoid direct sun which scorches fronds." },
+      { icon: "💧", label: "Water",    text: "Keep consistently moist but never waterlogged. Little and often." },
+      { icon: "🌡️", label: "Temp",     text: "16–24°C. Dislikes extremes of heat or cold." },
+      { icon: "💨", label: "Humidity", text: "High humidity essential. Mist daily or place on a pebble tray with water." },
+      { icon: "🌿", label: "Fertilize",text: "Monthly in spring/summer with half-strength balanced fertilizer." },
+      { icon: "⚠️", label: "Watch for",text: "Brown crispy fronds = too dry or low humidity. Most common issue." }
+    ]
+  },
+  "tropical": {
+    emoji: "🌴",
+    facts: [
+      { icon: "☀️", label: "Light",    text: "Bright indirect light mimicking dappled forest canopy." },
+      { icon: "💧", label: "Water",    text: "Consistently moist soil. Water when top 2–3cm dries out." },
+      { icon: "🌡️", label: "Temp",     text: "18–26°C. Keep away from cold draughts and heating vents." },
+      { icon: "💨", label: "Humidity", text: "High humidity. Mist regularly, group with other plants, or use a humidifier." },
+      { icon: "🌿", label: "Fertilize",text: "Every 4 weeks in spring/summer with a balanced liquid feed." },
+      { icon: "⚠️", label: "Watch for",text: "Brown leaf edges = low humidity. Yellow leaves = overwatering." }
+    ]
+  },
+  "lemon tree": {
+    emoji: "🍋",
+    facts: [
+      { icon: "☀️", label: "Light",    text: "Maximum sun — at least 8 hours daily. South-facing window or outdoors in summer." },
+      { icon: "💧", label: "Water",    text: "Every 7–10 days. Allow top layer to dry slightly. Ensure good drainage." },
+      { icon: "🌡️", label: "Temp",     text: "13–29°C. Can go outdoors May–September in the UK. Overwinter frost-free." },
+      { icon: "💨", label: "Humidity", text: "Moderate. Dry centrally-heated air can cause leaf drop in winter." },
+      { icon: "🌿", label: "Fertilize",text: "Every 2 weeks in growing season with citrus-specific fertilizer. Important." },
+      { icon: "⚠️", label: "Watch for",text: "Yellow leaves = usually nitrogen deficiency. Use citrus feed. Sticky leaves = scale insects." }
+    ]
+  },
+  "general": {
+    emoji: "🌱",
+    facts: [
+      { icon: "☀️", label: "Light",    text: "Most houseplants prefer bright indirect light. Avoid harsh midday sun." },
+      { icon: "💧", label: "Water",    text: "Check soil before watering — most plants prefer to dry slightly between waterings." },
+      { icon: "🌡️", label: "Temp",     text: "Most houseplants thrive between 16–24°C. Avoid draughts and radiators." },
+      { icon: "💨", label: "Humidity", text: "Average household humidity suits most plants. Misting helps in winter." },
+      { icon: "🌿", label: "Fertilize",text: "Feed monthly in spring and summer. No feeding needed in winter." },
+      { icon: "⚠️", label: "Watch for",text: "Yellow leaves, wilting, and brown tips are the most common distress signals." }
+    ]
+  }
+};
+
+/* ═══════════════════════════════════════
+   TOAST
+═══════════════════════════════════════ */
 function toast(msg) {
   const el = document.getElementById("toast");
   el.textContent = msg;
@@ -438,10 +578,13 @@ function toast(msg) {
   setTimeout(() => el.classList.remove("show"), 2400);
 }
 
+/* ═══════════════════════════════════════
+   WEATHER
+═══════════════════════════════════════ */
 async function loadWeather() {
   try {
     const res = await fetch(
-      "https://api.open-meteo.com/v1/forecast?latitude=51.5072&longitude=-0.1276&current=temperature_2m,weathercode"
+      "https://api.open-meteo.com/v1/forecast?latitude=51.5072&longitude=-0.1276&current=temperature_2m"
     );
     if (!res.ok) throw new Error();
     const data = await res.json();
@@ -449,46 +592,101 @@ async function loadWeather() {
     document.getElementById("weatherText").textContent =
       temp != null ? `London · ${temp}°C` : "London";
   } catch {
-    document.getElementById("weatherText").textContent = "Weather unavailable";
+    document.getElementById("weatherText").textContent = "London";
   }
 }
 
-function waterStatus(plant) {
-  if (!plant.last_watered || !plant.watering_interval_days) return null;
-  const lastMs     = new Date(plant.last_watered).getTime();
-  const intervalMs = plant.watering_interval_days * 86400000;
-  const dueMs      = lastMs + intervalMs;
-  const daysLeft   = Math.round((dueMs - Date.now()) / 86400000);
-  if (daysLeft > 1)  return { label: `Water in ${daysLeft}d`, cls: "water-ok" };
-  if (daysLeft >= 0) return { label: "Water soon",            cls: "water-due" };
-  return               { label: `${Math.abs(daysLeft)}d overdue`, cls: "water-late" };
+/* ═══════════════════════════════════════
+   CARE STATUS HELPERS
+═══════════════════════════════════════ */
+function careStatus(lastDate, intervalDays) {
+  if (!lastDate || !intervalDays) return null;
+  const daysLeft = Math.round((new Date(lastDate).getTime() + intervalDays * 86400000 - Date.now()) / 86400000);
+  if (daysLeft > 1)  return { label: `Due in ${daysLeft}d`,        cls: "badge-green", daysLeft };
+  if (daysLeft >= 0) return { label: "Due soon",                   cls: "badge-amber", daysLeft };
+  return               { label: `${Math.abs(daysLeft)}d overdue`,  cls: "badge-red",   daysLeft };
 }
 
+/* ═══════════════════════════════════════
+   HEALTH SCORE
+   Looks at watering + fertilizing overdue state
+═══════════════════════════════════════ */
+function calcHealth(plant) {
+  const ws = careStatus(plant.last_watered,    plant.watering_interval_days);
+  const fs = careStatus(plant.last_fertilized, plant.fertilize_interval_days);
+
+  let score = 100;
+  let issues = [];
+
+  if (!plant.last_watered) {
+    score -= 30;
+    issues.push("no watering recorded");
+  } else if (ws && ws.daysLeft < 0) {
+    const penalty = Math.min(40, Math.abs(ws.daysLeft) * 5);
+    score -= penalty;
+    if (Math.abs(ws.daysLeft) >= 2) issues.push(`watering ${Math.abs(ws.daysLeft)}d overdue`);
+  }
+
+  if (!plant.last_fertilized) {
+    score -= 10;
+  } else if (fs && fs.daysLeft < 0) {
+    const penalty = Math.min(20, Math.abs(fs.daysLeft) * 2);
+    score -= penalty;
+    if (Math.abs(fs.daysLeft) >= 7) issues.push(`fertilizing overdue`);
+  }
+
+  score = Math.max(0, Math.min(100, score));
+
+  let tier, cls, emoji, summary;
+  if (score >= 80) {
+    tier = "great"; cls = "great"; emoji = "😊";
+    summary = issues.length === 0 ? "All care is up to date — looking great!" : `Doing well. ${issues.join(", ")}.`;
+  } else if (score >= 50) {
+    tier = "ok"; cls = "ok"; emoji = "😐";
+    summary = `Needs some attention — ${issues.join(", ")}.`;
+  } else {
+    tier = "needs attention"; cls = "needs"; emoji = "😟";
+    summary = `Needs urgent care — ${issues.join(", ")}.`;
+  }
+
+  return { score, tier, cls, emoji, summary };
+}
+
+/* ═══════════════════════════════════════
+   LOAD PLANTS (list view)
+═══════════════════════════════════════ */
 async function loadPlants() {
   const el = document.getElementById("plantList");
   const { data, error } = await db.from("plants").select("*").order("created_at", { ascending: false });
 
   if (error) {
-    el.innerHTML = `<div class="loading-text" style="color:var(--red)">Failed to load plants. Check console.</div>`;
-    console.error("loadPlants error:", error);
+    el.innerHTML = `<div class="loading-text" style="color:var(--red)">Failed to load. Check console.</div>`;
+    console.error("loadPlants:", error);
     return;
   }
 
   if (!data || data.length === 0) {
-    el.innerHTML = `<div class="empty-state"><div class="big-leaf">🌱</div><p>No plants yet.<br>Add your first one below.</p></div>`;
+    el.innerHTML = `
+      <div class="empty-state">
+        <div class="big-leaf">🌱</div>
+        <p>No plants yet.<br>Add your first one below.</p>
+      </div>`;
     return;
   }
 
   el.innerHTML = data.map(p => {
-    const ws     = waterStatus(p);
-    const badge  = ws ? `<span class="water-badge ${ws.cls}">${ws.label}</span>` : "";
+    const ws     = careStatus(p.last_watered, p.watering_interval_days);
+    const health = calcHealth(p);
+    const badge  = ws ? `<span class="badge ${ws.cls}">${ws.label}</span>` : "";
     const avatar = p.photo_url ? `<img src="${p.photo_url}" alt="">` : `<span>🌿</span>`;
+    const healthDot = health.cls === "great" ? "✅" : health.cls === "ok" ? "⚠️" : "🚨";
+
     return `
       <div class="plant-card" onclick="openPlant('${p.id}')">
         <div class="plant-card-left">
           <div class="plant-avatar">${avatar}</div>
           <div>
-            <div class="plant-card-name">${escHtml(p.name)}</div>
+            <div class="plant-card-name">${escHtml(p.name)} <span style="font-size:12px">${healthDot}</span></div>
             <div class="plant-card-sub">${escHtml(p.location || p.species || "")}</div>
           </div>
         </div>
@@ -500,23 +698,27 @@ async function loadPlants() {
   }).join("");
 }
 
+/* ═══════════════════════════════════════
+   ADD PLANT
+═══════════════════════════════════════ */
 async function addPlant() {
   const nameVal = document.getElementById("newName").value.trim();
   if (!nameVal) { toast("Please enter a plant name"); return; }
 
   const payload = {
-    name:                   nameVal,
-    species:                document.getElementById("newSpecies").value.trim() || null,
-    location:               document.getElementById("newLocation").value.trim() || null,
-    plant_type:             document.getElementById("newType").value,
-    watering_interval_days: parseInt(document.getElementById("newInterval").value) || 7,
-    notes:                  document.getElementById("newNotes").value.trim() || null,
+    name:                    nameVal,
+    species:                 document.getElementById("newSpecies").value.trim() || null,
+    location:                document.getElementById("newLocation").value.trim() || null,
+    plant_type:              document.getElementById("newType").value,
+    watering_interval_days:  parseInt(document.getElementById("newInterval").value) || 7,
+    fertilize_interval_days: parseInt(document.getElementById("newFertilizeInterval").value) || 30,
+    notes:                   document.getElementById("newNotes").value.trim() || null,
   };
 
   const { error } = await db.from("plants").insert([payload]);
-  if (error) { toast("Error adding plant"); console.error("addPlant error:", error); return; }
+  if (error) { toast("Error adding plant"); console.error("addPlant:", error); return; }
 
-  ["newName","newSpecies","newLocation","newInterval","newNotes"].forEach(id => {
+  ["newName","newSpecies","newLocation","newInterval","newFertilizeInterval","newNotes"].forEach(id => {
     document.getElementById(id).value = "";
   });
   document.getElementById("newType").value = "general";
@@ -525,9 +727,12 @@ async function addPlant() {
   loadPlants();
 }
 
+/* ═══════════════════════════════════════
+   OPEN PLANT (detail view)
+═══════════════════════════════════════ */
 async function openPlant(id) {
   const { data, error } = await db.from("plants").select("*").eq("id", id).single();
-  if (error || !data) { toast("Could not load plant"); console.error("openPlant error:", error); return; }
+  if (error || !data) { toast("Could not load plant"); console.error("openPlant:", error); return; }
 
   current = data;
   document.getElementById("listView").classList.add("hidden");
@@ -535,92 +740,178 @@ async function openPlant(id) {
   document.getElementById("editBox").classList.add("hidden");
   window.scrollTo(0, 0);
 
+  // Photo
   const photoBox = document.getElementById("detailPhoto");
   photoBox.innerHTML = data.photo_url
-    ? `<img src="${data.photo_url}" alt="Photo of ${escHtml(data.name)}">`
+    ? `<img src="${data.photo_url}" alt="${escHtml(data.name)}">`
     : `<div class="detail-photo-empty">🌿</div>`;
 
   document.getElementById("detailName").textContent    = data.name;
   document.getElementById("detailSpecies").textContent = data.species || "";
 
-  const ws         = waterStatus(data);
-  const lastWatered = data.last_watered
-    ? new Date(data.last_watered).toLocaleDateString("en-GB", { day:"numeric", month:"short", year:"numeric" })
-    : "Never";
+  // Health banner
+  const health = calcHealth(data);
+  document.getElementById("healthBanner").outerHTML = `
+    <div id="healthBanner" class="health-banner ${health.cls}" style="margin-bottom:16px;">
+      <div class="health-ring">${health.score}</div>
+      <div>
+        <div class="health-text-title">Health: ${health.tier}</div>
+        <div class="health-text-sub">${health.summary}</div>
+      </div>
+    </div>`;
 
+  // Care action cards
+  const ws = careStatus(data.last_watered,    data.watering_interval_days);
+  const fs = careStatus(data.last_fertilized, data.fertilize_interval_days);
+
+  const lastWateredStr = data.last_watered
+    ? `Last: ${new Date(data.last_watered).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}`
+    : "Never watered";
+  const lastFertStr = data.last_fertilized
+    ? `Last: ${new Date(data.last_fertilized).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}`
+    : "Never fertilized";
+
+  document.getElementById("waterStatus").innerHTML    = ws ? `<span class="badge ${ws.cls}">${ws.label}</span>` : `<span style="color:var(--ink-muted);font-size:13px">No interval set</span>`;
+  document.getElementById("waterDate").textContent    = lastWateredStr;
+  document.getElementById("fertilizeStatus").innerHTML = fs ? `<span class="badge ${fs.cls}">${fs.label}</span>` : `<span style="color:var(--ink-muted);font-size:13px">No interval set</span>`;
+  document.getElementById("fertilizeDate").textContent = lastFertStr;
+
+  // Species facts
+  renderFacts(data.plant_type);
+
+  // Coach tip
+  renderCoach(data.plant_type);
+
+  // Meta
   document.getElementById("detailMeta").innerHTML = `
-    ${metaRow("Location",       data.location || "—")}
-    ${metaRow("Type",           data.plant_type || "—")}
-    ${metaRow("Watering every", data.watering_interval_days ? `${data.watering_interval_days} days` : "—")}
-    ${metaRow("Last watered",   lastWatered)}
-    ${ws ? metaRow("Status",    `<span class="water-badge ${ws.cls}">${ws.label}</span>`) : ""}
+    ${metaRow("Location",         data.location || "—")}
+    ${metaRow("Type",             data.plant_type || "—")}
+    ${metaRow("Water every",      data.watering_interval_days  ? `${data.watering_interval_days} days`  : "—")}
+    ${metaRow("Fertilize every",  data.fertilize_interval_days ? `${data.fertilize_interval_days} days` : "—")}
     ${data.notes ? metaRow("Notes", escHtml(data.notes)) : ""}
   `;
-
-  showCoach(data.plant_type);
 }
 
 function metaRow(label, value) {
   return `<div class="meta-row"><span class="meta-label">${label}</span><span class="meta-value">${value}</span></div>`;
 }
 
-function showCoach(type) {
+/* ═══════════════════════════════════════
+   SPECIES FACTS
+═══════════════════════════════════════ */
+function renderFacts(type) {
+  const box  = document.getElementById("factsCard");
+  const data = SPECIES_FACTS[type] || SPECIES_FACTS["general"];
+
+  box.innerHTML = `
+    <div class="facts-title">${data.emoji} About this plant type</div>
+    ${data.facts.map(f => `
+      <div class="fact-row">
+        <span class="fact-icon">${f.icon}</span>
+        <span class="fact-text"><strong>${f.label}:</strong> ${f.text}</span>
+      </div>`).join("")}
+  `;
+  box.classList.remove("hidden");
+}
+
+/* ═══════════════════════════════════════
+   COACH TIP
+═══════════════════════════════════════ */
+function renderCoach(type) {
   const tips = {
-    "fiddle leaf fig": "Loves bright indirect light. Avoid moving it — it hates change. Let the top 2cm of soil dry out before watering.",
-    "tropical":        "Needs warmth and humidity. Mist leaves occasionally and keep away from cold draughts.",
-    "succulent":       "Water sparingly — let the soil dry out completely between waterings. Loves a sunny spot.",
-    "fern":            "Keep soil consistently moist and humidity high. Avoid direct sun and dry air.",
-    "general":         "Check soil moisture regularly and adjust watering based on season and conditions."
+    "fiddle leaf fig": "Pro tip: Wipe leaves with a damp cloth monthly to remove dust — it genuinely helps the plant photosynthesise better.",
+    "monstera":        "Pro tip: Aerial roots can be tucked into the soil to boost stability and nutrient uptake.",
+    "rubber plant":    "Pro tip: Clean the large waxy leaves monthly. A healthy rubber plant should have a glossy sheen.",
+    "snake plant":     "Pro tip: Snake plants actually prefer to be slightly pot-bound. Only repot when roots are visibly escaping.",
+    "pothos":          "Pro tip: Trail or hang for faster growth. The longer the vine, the more light it wants.",
+    "peace lily":      "Pro tip: Use filtered or room-temperature water. Cold tap water can cause brown tips.",
+    "succulent":       "Pro tip: Terracotta pots are ideal — they allow soil to dry faster and prevent root rot.",
+    "cactus":          "Pro tip: In winter, reduce watering almost completely. This mimics natural drought and encourages flowering.",
+    "orchid":          "Pro tip: Ice cubes are a myth — use room-temperature water. After flowering, cut the spike to encourage reblooming.",
+    "fern":            "Pro tip: Group ferns together to create a micro-humidity zone. They thrive in clusters.",
+    "tropical":        "Pro tip: In the UK winter, move plants closer to windows and reduce watering frequency significantly.",
+    "lemon tree":      "Pro tip: Hand-pollinate flowers with a small brush for better fruit set when growing indoors.",
+    "general":         "Pro tip: Most plants struggle more from overwatering than underwatering. When in doubt, wait a day or two."
   };
+
   const box = document.getElementById("coachBox");
   const tip = tips[type];
   if (tip) {
-    box.innerHTML = `<div class="coach-box-title">Care tip</div>${tip}`;
+    box.innerHTML = `<div class="coach-box-title">💡 Pro tip</div>${tip}`;
     box.classList.remove("hidden");
   } else {
     box.classList.add("hidden");
   }
 }
 
+/* ═══════════════════════════════════════
+   WATER
+═══════════════════════════════════════ */
 async function waterPlant() {
   if (!current) return;
-  const { error } = await db.from("plants").update({ last_watered: new Date().toISOString() }).eq("id", current.id);
-  if (error) { toast("Error logging watering"); console.error("waterPlant error:", error); return; }
+  const { error } = await db.from("plants")
+    .update({ last_watered: new Date().toISOString() })
+    .eq("id", current.id);
+  if (error) { toast("Error logging watering"); console.error("waterPlant:", error); return; }
   toast("Watered 💧");
   openPlant(current.id);
   loadPlants();
 }
 
+/* ═══════════════════════════════════════
+   FERTILIZE
+═══════════════════════════════════════ */
+async function fertilizePlant() {
+  if (!current) return;
+  const { error } = await db.from("plants")
+    .update({ last_fertilized: new Date().toISOString() })
+    .eq("id", current.id);
+  if (error) { toast("Error logging fertilizing"); console.error("fertilizePlant:", error); return; }
+  toast("Fertilized 🌿");
+  openPlant(current.id);
+  loadPlants();
+}
+
+/* ═══════════════════════════════════════
+   PHOTO UPLOAD
+═══════════════════════════════════════ */
 async function uploadPhoto() {
   const file = document.getElementById("photoInput").files[0];
   if (!file || !current) return;
-  toast("Uploading photo…");
+  toast("Uploading…");
 
   const ext      = file.name.split(".").pop();
   const fileName = `${current.id}-${Date.now()}.${ext}`;
 
-  const { error: uploadError } = await db.storage.from("Plant-Photos").upload(fileName, file, { upsert: true });
-  if (uploadError) { toast("Upload failed"); console.error("uploadPhoto error:", uploadError); return; }
+  const { error: uploadError } = await db.storage
+    .from("plant-photos").upload(fileName, file, { upsert: true });
+  if (uploadError) { toast("Upload failed"); console.error("uploadPhoto:", uploadError); return; }
 
-  const { data: urlData } = db.storage.from("Plant-Photos").getPublicUrl(fileName);
+  const { data: urlData } = db.storage.from("plant-photos").getPublicUrl(fileName);
 
-  const { error: updateError } = await db.from("plants").update({ photo_url: urlData.publicUrl }).eq("id", current.id);
-  if (updateError) { toast("Could not save photo URL"); console.error("updatePhoto error:", updateError); return; }
+  const { error: updateError } = await db.from("plants")
+    .update({ photo_url: urlData.publicUrl }).eq("id", current.id);
+  if (updateError) { toast("Could not save photo"); console.error("updatePhoto:", updateError); return; }
 
   toast("Photo saved 📷");
   openPlant(current.id);
   loadPlants();
 }
 
+/* ═══════════════════════════════════════
+   EDIT
+═══════════════════════════════════════ */
 function showEditBox() {
   if (!current) return;
-  document.getElementById("eName").value     = current.name || "";
-  document.getElementById("eSpecies").value  = current.species || "";
-  document.getElementById("eLocation").value = current.location || "";
-  document.getElementById("eInterval").value = current.watering_interval_days || 7;
-  document.getElementById("eType").value     = current.plant_type || "general";
-  document.getElementById("eNotes").value    = current.notes || "";
+  document.getElementById("eName").value            = current.name || "";
+  document.getElementById("eSpecies").value         = current.species || "";
+  document.getElementById("eLocation").value        = current.location || "";
+  document.getElementById("eInterval").value        = current.watering_interval_days || 7;
+  document.getElementById("eFertilizeInterval").value = current.fertilize_interval_days || 30;
+  document.getElementById("eType").value            = current.plant_type || "general";
+  document.getElementById("eNotes").value           = current.notes || "";
   document.getElementById("editBox").classList.remove("hidden");
+  document.getElementById("editBox").scrollIntoView({ behavior: "smooth" });
 }
 
 function hideEditBox() {
@@ -630,47 +921,58 @@ function hideEditBox() {
 async function saveEdit() {
   if (!current) return;
   const payload = {
-    name:                   document.getElementById("eName").value.trim(),
-    species:                document.getElementById("eSpecies").value.trim() || null,
-    location:               document.getElementById("eLocation").value.trim() || null,
-    plant_type:             document.getElementById("eType").value,
-    watering_interval_days: parseInt(document.getElementById("eInterval").value) || 7,
-    notes:                  document.getElementById("eNotes").value.trim() || null,
+    name:                    document.getElementById("eName").value.trim(),
+    species:                 document.getElementById("eSpecies").value.trim() || null,
+    location:                document.getElementById("eLocation").value.trim() || null,
+    plant_type:              document.getElementById("eType").value,
+    watering_interval_days:  parseInt(document.getElementById("eInterval").value) || 7,
+    fertilize_interval_days: parseInt(document.getElementById("eFertilizeInterval").value) || 30,
+    notes:                   document.getElementById("eNotes").value.trim() || null,
   };
   if (!payload.name) { toast("Name is required"); return; }
 
   const { error } = await db.from("plants").update(payload).eq("id", current.id);
-  if (error) { toast("Error saving changes"); console.error("saveEdit error:", error); return; }
+  if (error) { toast("Error saving"); console.error("saveEdit:", error); return; }
 
-  toast("Changes saved ✓");
+  toast("Saved ✓");
   hideEditBox();
   openPlant(current.id);
   loadPlants();
 }
 
+/* ═══════════════════════════════════════
+   DELETE
+═══════════════════════════════════════ */
 async function deletePlant() {
   if (!current) return;
   if (!confirm(`Delete "${current.name}"? This can't be undone.`)) return;
-
   const { error } = await db.from("plants").delete().eq("id", current.id);
-  if (error) { toast("Error deleting plant"); console.error("deletePlant error:", error); return; }
-
+  if (error) { toast("Error deleting"); console.error("deletePlant:", error); return; }
   toast("Plant deleted");
   back();
   loadPlants();
 }
 
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
 function back() {
   document.getElementById("detailView").classList.add("hidden");
   document.getElementById("listView").classList.remove("hidden");
   current = null;
 }
 
+/* ═══════════════════════════════════════
+   UTILITY
+═══════════════════════════════════════ */
 function escHtml(str) {
   if (!str) return "";
   return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
+/* ═══════════════════════════════════════
+   BOOT
+═══════════════════════════════════════ */
 loadWeather();
 loadPlants();
 </script>
