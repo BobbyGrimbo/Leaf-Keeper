@@ -1238,16 +1238,37 @@ async function uploadPhoto() {
   if (!file || !current) return;
   toast("Uploading…");
 
-  const ext      = file.name.split(".").pop();
+  const ext      = file.name.split(".").pop().toLowerCase();
   const fileName = `${current.id}-${Date.now()}.${ext}`;
 
-  const { error: uploadError } = await db.storage.from("plant-photos").upload(fileName, file, { upsert: true });
-  if (uploadError) { toast("Upload failed"); console.error(uploadError); return; }
+  console.log("Attempting upload:", fileName, "size:", file.size, "type:", file.type);
 
-  const { data: urlData } = db.storage.from("plant-photos").getPublicUrl(fileName);
+  const { data: uploadData, error: uploadError } = await db.storage
+    .from("Plant-Photos")
+    .upload(fileName, file, { upsert: true, contentType: file.type });
 
-  const { error: updateError } = await db.from("plants").update({ photo_url: urlData.publicUrl }).eq("id", current.id);
-  if (updateError) { toast("Could not save photo"); console.error(updateError); return; }
+  if (uploadError) {
+    const msg = uploadError.message || uploadError.error || JSON.stringify(uploadError);
+    toast("Upload failed: " + msg);
+    console.error("UPLOAD ERROR FULL:", JSON.stringify(uploadError));
+    return;
+  }
+
+  console.log("Upload success:", uploadData);
+
+  const { data: urlData } = db.storage.from("Plant-Photos").getPublicUrl(fileName);
+
+  console.log("Public URL:", urlData.publicUrl);
+
+  const { error: updateError } = await db.from("plants")
+    .update({ photo_url: urlData.publicUrl })
+    .eq("id", current.id);
+
+  if (updateError) {
+    toast("Could not save photo URL: " + updateError.message);
+    console.error("UPDATE ERROR:", JSON.stringify(updateError));
+    return;
+  }
 
   toast("Photo saved 📷");
   openPlant(current.id); loadPlants();
@@ -1329,3 +1350,4 @@ loadPlants();
 
 </body>
 </html>
+
